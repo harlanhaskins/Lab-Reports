@@ -6,6 +6,7 @@
 
 \date{\today}
 \usepackage{pgfplots, pgfplotstable}
+\usepackage{amsmath}
 
 \begin{document}
 
@@ -108,23 +109,35 @@ $\pgfmathprintnumber{\pgfplotstableregressiona}x
 
 We can then estimate $k$ with the slope of this graph.\footnote{This value clashes with the value found by mathematically solving for $k$, likely due to an error in the graph.}
 
-\begin{center}$0.4=\frac{2\pi}{k}$\end{center}
-\begin{center}$k=\frac{2\pi}{0.4}$\end{center}
-\begin{center}$k=15.7$\end{center}
+\begin{center}
+\begin{align*}
+0.4 &= \frac{2\pi}{k} \\
+k &= \frac{2\pi}{0.4} \\
+k &= 15.7
+\end{align*}
+\end{center}
 
 \section{Results and Conclusions}
 
 We ran the necessary calculations on $200g$ $(0.2kg)$ masses for our final answer, but the provided graphs scale linearly. Using the \emph{Static Method}:
-\begin{center}$F=kx$\end{center}
-\begin{center}$(0.2m)(9.8\frac{m}{s^2})=k(0.45m-0.21m)$\end{center}
-\begin{center}$k=\frac{(0.2m)(9.8\frac{m}{s^2})}{0.24m}$\end{center}
-\begin{center}$k=8.06\frac{N}{m}$\end{center}
+
+\begin{align*}
+F &= kx \\
+(0.2m)(9.8\frac{m}{s^2}) &= k(0.45m-0.21m) \\
+k &= \frac{(0.2m)(9.8\frac{m}{s^2})}{0.24m} \\
+k &= 8.06\frac{N}{m}
+\end{align*}
+
 we estimated the spring to have a spring constant of $8.06\frac{N}{m}$.
 Using the \emph{Dynamic Method} where $T$ is the period of oscillation:
-\begin{center}$T^{2}=\frac{(2\pi)^{2}}{k}m$\end{center}
-\begin{center}$(\frac{10}{10.0}\frac{osc}{s})^2=\frac{(2\pi)^{2}}{k}(0.2kg)$\end{center}
-\begin{center}$1.0=\frac{(2\pi)^{2}}{k}(0.2kg)$\end{center}
-\begin{center}$k=2\pi^2(0.2g)$\end{center}
-\begin{center}$k=7.895\frac{N}{m}$\end{center}
+
+\begin{align*}
+T^{2} &= \frac{2\pi^{2}}{k}m \\
+\frac{10}{10.0}\frac{osc}{s}^2 &= \frac{2\pi^{2}}{k}(0.2kg) \\
+1.0 &= \frac{(2\pi)^{2}}{k}(0.2kg) \\
+k &= 2\pi^2(0.2g) \\
+k &= 7.895\frac{N}{m}
+\end{align*}
+
 the estimate becomes $7.895\frac{N}{m}$. The two forms of estimation agreed with each other to within $\pm{0.165}$.
 \end{document}
