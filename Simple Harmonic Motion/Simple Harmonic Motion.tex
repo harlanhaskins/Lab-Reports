@@ -82,7 +82,7 @@ X Y sigma
 100 60.2 0.699
 150 79.6 1.991
 200 99.6 1.045
-} \datatable
+} \oscillationtable
 
 \begin{center}
 \begin{tikzpicture}
@@ -96,10 +96,10 @@ X Y sigma
     grid style=dashed,
 ]
  
-\addplot [only marks, mark=square] table[y error=sigma] {\datatable};
+\addplot [only marks, mark=square] table[y error=sigma] {\oscillationtable};
 \addplot [thick, blue] table[
     y={create col/linear regression={y=Y}}
-]{\datatable};
+]{\oscillationtable};
 \addlegendentry{$y(x)$}
 \addlegendentry{
 $\pgfmathprintnumber{\pgfplotstableregressiona}x
@@ -115,6 +115,50 @@ We can then estimate $k$ with the slope of this graph.\footnote{This value clash
 0.4 &= \frac{2\pi}{k} \\
 k &= \frac{2\pi}{0.4} \\
 k &= 15.7
+\end{align*}
+\end{center}
+
+We can also estimate $k$ by looking at a graph of stretch distance vs mass.
+
+\pgfplotstableread {
+X Y
+20 24.01
+50 26.86
+100 32.92
+150 39.24
+200 45.46
+} \stretchtable
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis} [
+    title={Stretch Distance vs Mass},
+    xlabel={Mass [kg]},
+    ylabel={Stretch Distance $[cm]$},
+    legend pos=north west,
+    ymajorgrids=true,
+    xmajorgrids=true,
+    grid style=dashed,
+]
+ 
+\addplot [only marks, mark=square] table[y error=sigma] {\stretchtable};
+\addplot [thick, blue] table[
+    y={create col/linear regression={y=Y}}
+]{\stretchtable};
+\addlegendentry{$y(x)$}
+\addlegendentry{
+$\pgfmathprintnumber{\pgfplotstableregressiona}x
+\pgfmathprintnumber[print sign]{\pgfplotstableregressionb}$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+We can then estimate $k$ with the \emph{inverse} slope of this graph, as before.
+
+\begin{center}
+\begin{align*}
+k &= \frac{1}{0.12} \\
+k &= 8.\overline{3}
 \end{align*}
 \end{center}
 
