@@ -87,6 +87,8 @@ X Y sigma
 \begin{center}
 \begin{tikzpicture}
 \begin{axis} [
+	width=1.0\textwidth,
+    height=0.6\textwidth,
     title={Period of Oscillation vs Mass},
     xlabel={Mass [g]},
     ylabel={Oscillation Period $[\frac{osc^2}{s^2}]$},
@@ -132,8 +134,10 @@ X Y
 \begin{center}
 \begin{tikzpicture}
 \begin{axis} [
+	width=1.0\textwidth,
+    height=0.6\textwidth,
     title={Stretch Distance vs Mass},
-    xlabel={Mass [kg]},
+    xlabel={Mass [g]},
     ylabel={Stretch Distance $[cm]$},
     legend pos=north west,
     ymajorgrids=true,
@@ -153,7 +157,7 @@ $\pgfmathprintnumber{\pgfplotstableregressiona}x
 \end{tikzpicture}
 \end{center}
 
-We can then estimate $k$ with the \emph{inverse} slope of this graph, as before.
+We can then estimate $k$ with the \emph{inverse} of the slope of this graph.
 
 \begin{center}
 \begin{align*}
@@ -161,6 +165,8 @@ k &= \frac{1}{0.12} \\
 k &= 8.\overline{3}
 \end{align*}
 \end{center}
+
+\pagebreak
 
 \section{Results and Conclusions}
 
