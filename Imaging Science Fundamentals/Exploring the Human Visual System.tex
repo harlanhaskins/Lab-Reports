@@ -1,0 +1,183 @@
+\documentclass{article}
+
+\title{Exploring the Human Visual System\\ IMGS 111}
+
+\author{Harlan Haskins}
+
+\date{\today}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{pgfplots, pgfplotstable, gensymb}
+\setlength{\parindent}{1cm}
+\pgfplotsset{compat=1.13}
+\usepackage{amsmath}
+
+\newcommand{\parens}[1]{\left(#1\right)}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+\begin{tabular}{l r}
+Date Performed: & September 11th, 2016 \\
+Instructor: & Professor Vodacek \\
+Lab Section: & 2
+\end{tabular}
+\end{center}
+
+\pagebreak
+
+\section{Introduction}
+We set out to discover the lengths our eyes go to ensure the best visual acuity without disrupting our normal thinking patterns. To do so, we performed several experiments, mostly to test how quickly the eyes can adjust to changing environments.
+Through the several experiments, we observed:
+\begin{enumerate}
+    \item The trade-offs inherent in the evolution of the human eye, by locating the \emph{blind spot} in both eyes
+    \item The focal power of the eye when discerning objects at different depths
+    \item The eye's adaptivity to darkness, and the extent to which human eyes can adjust their light intake automatically to enable night vision
+\end{enumerate}
+
+\section{Methods}
+\subsection{Location of the Blind Spot}
+By focusing our eyes, one-at-a-time, on a single X, we ensured our blind 
+spot would stay in a consistent enough position to observe it as we
+moved our finger away from the X. There was a narrow band of space wherein
+our fingertips disappeared. We recorded the start and end of the space where
+our fingertip seemed to disappear, to calculate an approximate angle offset
+from the lens where the blind spot occurs.
+
+\subsection{Lens Accommodation}
+To observe the eye's ability to shift focus on demand, we forced focus by extending a pen an arm's length and bringing it into focus. Shifting focus back and forth between the pen and the wall behind it was more an exercise in fighting the eye's instinctual response.
+
+\subsection{Dark and Light Accommodation}
+To test the eye's response to changing environmental lightness, we observed a set of printed segments representing a gradient of brightness. We wanted to measure how quickly the eye could detect these shades after rapidly changing environmental brightness.
+
+\section{Experimental Data}
+\subsection{Location of the Blind Spot}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+\emph{Eye}   & \emph{Blind Spot Start} & \emph{Blind Spot End} & \emph{Blind Spot Length} \\ \hline
+Left  & 11.3cm           & 15.5cm         & 4.2cm             \\ \hline
+Right & 10.0cm           & 14.0cm         & 4.0cm             \\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Lens Accommodation}
+For the first part, the pattern on the wall behind the pen was slightly out of focus, but not indistinguishable. Changing focus to the wall, suddenly the pen was equally out of focus compared to the wall. It took until the pen was less than 30cm away from the wall for them both to be in focus, while at arm's length, and when moving the pen toward my face, it stopped being clear once it was about 8cm away from my eyes. Without my glasses on, it was blurry at almost all distances, but only became clear aroun 5cm away from my eyes.
+
+\subsection{Dark and Light Adaptation}
+\subsubsection{Dark Room}
+When measuring adaptivity for the dark room, it seemed that immediately after turning off the light we were not able to distinguish any steps. Even after waiting 30 seconds, we still couldn't agree on a set of steps we could distinguish --- it seemed there were 3 sections that we could distinguish, but not a clear range of distinguishable shades.
+
+\begin{table}[ht]
+    \begin{tabular}{|l|l|}
+    \hline
+    \emph{Elapsed Time} & \emph{Visibility}        \\ \hline
+    10 seconds   & Could not distinguish any steps \\ \hline
+    30 seconds   & 3 Nondistinct Steps             \\ \hline
+    1 minute     & Steps 5 - 3                     \\ \hline
+    3 minutes    & Steps 9 - 1                     \\ \hline
+    \end{tabular}
+\end{table}
+
+\pgfplotstableread {
+X Y
+10 0
+30 1
+60 3
+180 9
+} \darktable
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis} [
+	width=1.0\textwidth,
+    height=0.6\textwidth,
+    title={Dark Room Visibility},
+    xlabel={Time [s]},
+    ylabel={Number of Distinguishable Sections},
+    ymajorgrids=true,
+    xmajorgrids=true,
+    grid style=dashed,
+]
+ 
+\addplot [only marks, mark=square] table[y] {\darktable};
+\addplot [thick, blue] table[
+    y={create col/linear regression={y=Y}}
+]{\darktable};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\pagebreak
+
+\subsubsection{Light Room}
+We were initially confused upon turning the lights back on --- there was no adjustment period, really. Immediately we could distinguish all 12 shades, and that didn't change as time went on. I've included the table and graph for those, for completeness.
+
+\begin{table}[ht]
+    \begin{tabular}{|l|l|}
+    \hline
+    \emph{Elapsed Time} & \emph{Visibility}   \\ \hline
+    5 seconds    & Steps 12 - 1 \\ \hline
+    10 seconds   & Steps 12 - 1 \\ \hline
+    20 seconds   & Steps 12 - 1 \\ \hline
+    \end{tabular}
+\end{table}
+
+\pgfplotstableread {
+X Y
+5 12
+10 12
+20 12
+} \lighttable
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis} [
+	width=1.0\textwidth,
+    height=0.6\textwidth,
+    title={Light Room Visibility},
+    xlabel={Time [s]},
+    ylabel={Number of Distinguishable Sections},
+    ymajorgrids=true,
+    xmajorgrids=true,
+    grid style=dashed,
+]
+ 
+\addplot [only marks, mark=square] table[y] {\lighttable};
+\addplot [thick, blue] table[
+    y={create col/linear regression={y=Y}}
+]{\lighttable};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\pagebreak
+
+\section{Discussion}
+\subsection{Blind Spot}
+Performing this experiment gave us insight into a part of our eyes that we hadn't really thought about. Though our eyes are bilaterally symmetrical around the center of our head, each eye is absolutely not bilaterally symmetrical --- the blind spot is not replicated on the other side of the eye. Our brain does a good job filling in information that the blind spot misses, which contributed to a lot of confusion while trying to locate it. When a finger passes in and out of the blind spot, the brain works incredibly hard to patch the missing information. \\
+My right blind spot is about $23.5\degree$ off-center, which is calculated using the following formula:
+\begin{center}
+\begin{align*}
+\theta &= tan^{-1}\parens{\frac{l}{d}} \\
+\theta &= tan^{-1}\parens{\frac{2 * 13.4}{25cm}} \\
+\theta &= tan^{-1}\parens{\frac{26.8}{25cm}} \\
+\theta &= tan^{-1}\parens{1.072} \\
+\theta &= 47\degree
+\end{align*}
+\end{center}
+
+Which means the angle from the center is $\frac{47\degree}{2}$ or $23.5\degree$.
+
+Given that the blind spot is to the right on my right eye, that means the rays coming in from that portion of my field of vision must be hitting my eye on the \emph{left}, so the optic nerve is actually on the nasal side of my eye.
+
+\subsection{Lens Accommodation}
+There's absolutely a limit to the depth that your eyes are able to accommodate. There's a physical limit to the stretch and motion of the lens, which naturally limits the ability to focus. My near point with glasses is somewhere around 8cm, but without glasses, I can't see anything clearly until about 15cm away, and it goes out of focus very quickly.
+
+\subsection{Dark and Light Adaptation}
+In a dark environment, eyes primarily rely on rods, not cones, for vision. Cones are sensitive to color, while rods are sensitive to brightness. In a dark environment, the rods take over enabling us to discern anything. This switchover takes time, so the eyes gradually get more sensitive. The eyes adapt independently, which normally doesn't make a difference --- usually you're using both eyes at once. However, part of the experiment meant covering one eye for 3 minutes to adapt it to darkness explicitly, then turning off the lights and uncovering that eye. This was easily the most disorienting experience I've ever had, and it really solidified my understanding of ocular adaptation.
+
+\end{document}
